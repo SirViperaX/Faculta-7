@@ -11,7 +11,9 @@ namespace Faculta_7
         static void Main(string[] args)
         {
            /* Problema6();*/
-            Problema7();
+           /* Problema7();*/
+            Dt x=new Dt();
+            Console.Write(x.Ret());
         }
         
 
@@ -63,6 +65,85 @@ namespace Faculta_7
                     s = s * 10 + i;
             Console.WriteLine(s);
         }
+
+        public class Dt
+        {
+            int a, z, l, m, h, s;
+            public Dt()
+            {
+                a = 2011;
+                l = 4;
+                z = 23;
+                h = 13;
+                m = 23;
+                s = 47;
+            }
+            public ulong Ret()
+            {
+                ulong zl = (ulong)(a - 1) * 365;
+                zl += (ulong)AniBisecti(a - 1);
+                zl += (ulong)Zile(l - 1);
+                zl += (ulong)z - 1;
+                if (AnBisect(a) || l > 2)
+                    zl++;
+                ulong sec = (ulong)(zl* 24 * 3600);
+                sec += (ulong)(h - 1) * 3600;
+                sec += (ulong)(m - 1) * 60;
+                sec += (ulong)s;
+                return sec;
+
+            }
+        }
+        public static int Zile(int luna)
+        {
+            switch(luna)
+            {
+                case 0:
+                    return 0;
+                case 1:
+                    return 31;
+                case 2:
+                    return 28;
+                case 3:
+                    return 31;
+                case 4:
+                    return 30;
+                case 5:
+                    return 31;
+                case 6:
+                    return 30;
+                case 7:
+                    return 31;
+                case 8:
+                    return 31;
+                case 9:
+                    return 30;
+                case 10:
+                    return 31;
+                case 11:
+                    return 30;
+                case 12:
+                    return 31;
+                default:
+                    return -1;
+            }
+        }
+        public static bool AnBisect(int a)
+        {
+            if (a % 400 == 0 || (a % 4 == 0 && a % 100 != 0))
+                return true;
+            return false;
+        }
+
+        public static int AniBisecti(int a)
+        {
+            int b = 0;
+            for(int i = 0; i<=a;i++)
+                if (AnBisect(i))
+                    b++;
+            return b;
+        }
+
         static int[] FileReader()
         {
             TextReader load = new StreamReader(@"Resources.txt");
